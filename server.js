@@ -33,21 +33,33 @@ app.get('/collectibles/:index', (req, res) => {
     { name: 'vintage 1970s yogurt SOLD AS-IS', price: 0.99 }
   ];
 
-  // index comes from the URL param
   const i = Number(req.params.index);
-
-  // optional: you can still log these (but they won’t exist in this route)
-  console.log(req.params.name, req.query.price);
 
   let findCollectibles = collectibles[i];
 
-  // check if collectible exists
   if (!findCollectibles) {
     return res.send("This item is not yet in stock. Check back soon!");
   }
 
-  // response with name + price
   res.send(
     `So, you want the ${findCollectibles.name}? For ${findCollectibles.price}, it can be yours!`
   );
+});
+
+/* 4. Filter Shoes by Query Parameters */
+app.get('/shoes/:name', (req, res) => {
+      const shoes = [
+      { name: "Birkenstocks", price: 50, type: "sandal" },
+      { name: "Air Jordans", price: 500, type: "sneaker" },
+      { name: "Air Mahomeses", price: 501, type: "sneaker" },
+      { name: "Utility Boots", price: 20, type: "boot" },
+      { name: "Velcro Sandals", price: 15, type: "sandal" },
+      { name: "Jet Boots", price: 1000, type: "boot" },
+      { name: "Fifty-Inch Heels", price: 175, type: "heel" }
+  ];
+  const minPrice = req.query['min-price'];
+  const maxPrice = req.query['max-price'];
+  const type = req.query.type
+
+  
 });
